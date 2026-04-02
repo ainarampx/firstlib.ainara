@@ -20,6 +20,24 @@ filtre_anomalie <- function(trajet) {
     )
 }
 
+#' Filtrer un jeu de donnees par numero de boucle
+#'
+#' Cette fonction permet de selectionner uniquement certaines boucles de
+#' comptage dans un jeu de donnees de trajets velo.
+#'
+#' @param trajet Un data.frame contenant les donnees de trajets velo.
+#' @param boucle Un vecteur de numeros de boucle a conserver.
+#'
+#' @return Un data.frame filtre sur les boucles selectionnees.
+#' @export
+#'
+#' @examples
+#' filtrer_trajet(trajet = df_velo, boucle = c("880", "881"))
+filtrer_trajet <- function(trajet, boucle) {
+  trajet |>
+    dplyr::filter(`Numéro de boucle` %in% boucle)
+}
+
 
 #' Compter le nombre total de trajets
 #'
