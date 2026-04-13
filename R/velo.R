@@ -107,14 +107,21 @@ trouver_trajet_max <- function(trajet) {
 #' jour de la semaine.
 #'
 #' @param trajet Un data.frame contenant les donnees de trajets velo.
+#' @param filtre Un booléen indiquant si les anomalies doivent être filtrées
+#'   avant le calcul.
 #'
 #' @return Un data.frame contenant les jours de la semaine et le nombre de
-#'   trajets associe.
+#'   trajets associé.
 #' @export
 #'
 #' @examples
 #' calcul_distribution_semaine(df_velo)
-calcul_distribution_semaine <- function(trajet) {
+#' calcul_distribution_semaine(df_velo, filtre = FALSE)
+calcul_distribution_semaine <- function(trajet, filtre = TRUE) {
+  if (filtre) {
+    trajet <- filtre_anomalie(trajet)
+  }
+
   trajet |>
     dplyr::count(`Jour de la semaine`, wt = Total, sort = TRUE, name = "trajets")
 }
@@ -137,15 +144,10 @@ plot_distribution_semaine <- function(trajet) {
     filtre_anomalie() |>
     calcul_distribution_semaine() |>
     dplyr::mutate(
-      jour = forcats::fct_recode(
-        factor(`Jour de la semaine`),
-        "lundi" = "1",
-        "mardi" = "2",
-        "mercredi" = "3",
-        "jeudi" = "4",
-        "vendredi" = "5",
-        "samedi" = "6",
-        "dimanche" = "7"
+      jour = factor(
+        `Jour de la semaine`,
+        levels = 1:7,
+        labels = c("lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche")
       )
     )
 
