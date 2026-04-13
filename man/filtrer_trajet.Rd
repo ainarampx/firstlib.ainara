@@ -4,7 +4,7 @@
 \alias{filtrer_trajet}
 \title{Filtrer un jeu de donnees par numero de boucle}
 \usage{
-filtrer_trajet(trajet, boucle)
+filtrer_trajet(trajet, boucle = NULL)
 }
 \arguments{
 \item{trajet}{Un data.frame contenant les donnees de trajets velo.}

@@ -4,14 +4,17 @@
 \alias{calcul_distribution_semaine}
 \title{Calculer la distribution hebdomadaire des trajets}
 \usage{
-calcul_distribution_semaine(trajet)
+calcul_distribution_semaine(trajet, filtre = TRUE)
 }
 \arguments{
 \item{trajet}{Un data.frame contenant les donnees de trajets velo.}
+
+\item{filtre}{Un booléen indiquant si les anomalies doivent être filtrées
+avant le calcul.}
 }
 \value{
 Un data.frame contenant les jours de la semaine et le nombre de
-trajets associe.
+trajets associé.
 }
 \description{
 Cette fonction calcule la repartition du nombre total de trajets selon le
@@ -19,4 +22,5 @@ jour de la semaine.
 }
 \examples{
 calcul_distribution_semaine(df_velo)
+calcul_distribution_semaine(df_velo, filtre = FALSE)
 }
